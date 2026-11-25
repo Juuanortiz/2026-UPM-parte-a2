@@ -48,10 +48,11 @@ class SubscriptionServiceTest {
 	
 
 	@Test
-	public void testRemoveSubscriber() throws NullUserException, ExistingUserException, UserDoesNotHaveEmailException {
+	public void testRemoveSubscriber() throws NullUserException, ExistingUserException, UserDoesNotHaveEmailException, NonExistingUserException {
 		SubscriptionService service = new SubscriptionService(email);
 		User user = new User(Delivery.LOCAL, "john.doe@example.com");
 		service.addSubscriber(user);
+		service.removeSubscriber(user);
 		assertThrows(NonExistingUserException.class, () -> {
 			service.removeSubscriber(user);
 		});
